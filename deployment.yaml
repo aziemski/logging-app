@@ -1,0 +1,25 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: logging-app-py
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: logging-app-py
+  template:
+    metadata:
+      labels:
+        app: logging-app-py
+    spec:
+      terminationGracePeriodSeconds: 0
+      containers:
+      - name: logging-app-py
+        image: aziemski/logging-app:latest
+        imagePullPolicy: Always
+        env:
+        - name: DELAY_SECONDS
+          value: "0.000001"
+        - name: USE_LONG_MESSAGE
+          value: "yes"
+
